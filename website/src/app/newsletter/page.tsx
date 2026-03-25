@@ -17,7 +17,7 @@ export default function Newsletter() {
     setError("");
     
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers`, {
         method: "POST",
         headers: { 
           "apikey": SUPABASE_ANON_KEY,
@@ -26,16 +26,20 @@ export default function Newsletter() {
           "Prefer": "return=minimal"
         },
         body: JSON.stringify({
-          name: email,
-          notes: "newsletter_signup",
-          status: "newsletter"
+          email: email,
+          source: "website"
         })
       });
       
       if (response.ok || response.status === 201) {
         setSubmitted(true);
       } else {
-        setError("Something went wrong. Try again.");
+        const data = await response.json();
+        if (data?.code === "23505") {
+          setError("You're already subscribed!");
+        } else {
+          setError("Something went wrong. Try again.");
+        }
       }
     } catch (err) {
       setError("Something went wrong. Try again.");

@@ -19,17 +19,20 @@ export default function SubmitSkill() {
     const formData = new FormData(form);
     
     const submission = {
-      name: formData.get("email") as string,
-      phone: formData.get("name") as string,
-      address: formData.get("skill_name") as string,
-      bin_size: formData.get("category") as string,
-      waste_type: formData.get("description") as string,
-      notes: `SKILL SUBMISSION\n\nGitHub: ${formData.get("github") || "N/A"}\nNewsletter: ${formData.get("newsletter") || "no"}\nSources: ${formData.get("sources") || "N/A"}\n\n---CONTENT---\n${formData.get("skill_content")}`,
-      status: "skill_submission"
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      github: formData.get("github") as string || null,
+      skill_name: formData.get("skill_name") as string,
+      category: formData.get("category") as string,
+      description: formData.get("description") as string,
+      skill_content: formData.get("skill_content") as string,
+      sources: formData.get("sources") as string || null,
+      newsletter: formData.get("newsletter") === "yes",
+      status: "pending"
     };
     
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/skill_submissions`, {
         method: "POST",
         headers: { 
           "apikey": SUPABASE_ANON_KEY,
@@ -41,6 +44,19 @@ export default function SubmitSkill() {
       });
       
       if (response.ok || response.status === 201) {
+        // Also add to newsletter if checked
+        if (submission.newsletter) {
+          await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers`, {
+            method: "POST",
+            headers: { 
+              "apikey": SUPABASE_ANON_KEY,
+              "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+              "Content-Type": "application/json",
+              "Prefer": "return=minimal"
+            },
+            body: JSON.stringify({ email: submission.email, source: "skill_submission" })
+          });
+        }
         setSubmitted(true);
       } else {
         setError("Something went wrong. Try again or email us directly.");
