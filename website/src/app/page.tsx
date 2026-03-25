@@ -1,104 +1,35 @@
 import Link from "next/link";
 
 const skills = [
-  {
-    name: "ATO BAS Helper",
-    slug: "ato-bas-helper",
-    category: "Tax & Finance",
-    description: "BAS preparation, GST calculations, and ATO compliance",
-    tags: ["ato", "bas", "gst", "tax"],
-  },
-  {
-    name: "ABN Lookup",
-    slug: "abn-lookup", 
-    category: "Government",
-    description: "ABN validation and business registry search",
-    tags: ["abn", "acn", "business"],
-  },
-  {
-    name: "Fair Work Australia",
-    slug: "fair-work",
-    category: "Legal",
-    description: "Employment law, awards, NES, and workplace relations",
-    tags: ["employment", "awards", "minimum-wage"],
-  },
-  {
-    name: "Superannuation Guide",
-    slug: "superannuation",
-    category: "Tax & Finance",
-    description: "Super rules, contributions, SMSF, and retirement",
-    tags: ["super", "smsf", "retirement"],
-  },
-  {
-    name: "Australian English",
-    slug: "aussie-english",
-    category: "Localization",
-    description: "Australian spelling, terminology, and cultural context",
-    tags: ["english", "spelling", "localization"],
-  },
-  {
-    name: "myGov Services",
-    slug: "mygov-services",
-    category: "Government",
-    description: "Medicare, Centrelink, ATO and myGov linked services",
-    tags: ["mygov", "medicare", "centrelink"],
-  },
-  {
-    name: "Privacy Act",
-    slug: "privacy-act",
-    category: "Legal",
-    description: "Privacy Act 1988, APPs, and data breach notification",
-    tags: ["privacy", "data", "compliance"],
-  },
-  {
-    name: "NSW Stamp Duty",
-    slug: "nsw-stamp-duty",
-    category: "Tax & Finance",
-    description: "NSW transfer duty calculations and first home buyer exemptions",
-    tags: ["stamp-duty", "property", "nsw"],
-  },
-  {
-    name: "ASIC Company Search",
-    slug: "asic-company-search",
-    category: "Government",
-    description: "Search ASIC registers for company and director information",
-    tags: ["asic", "company", "directors"],
-  },
-  {
-    name: "VIC Rental Laws",
-    slug: "vic-rental-laws",
-    category: "Legal",
-    description: "Victorian tenancy laws, bonds, and dispute resolution",
-    tags: ["rental", "tenancy", "victoria"],
-  },
-  {
-    name: "Consumer Law",
-    slug: "consumer-law",
-    category: "Legal",
-    description: "ACL consumer guarantees, refunds, and warranties",
-    tags: ["acl", "consumer", "refunds"],
-  },
-  {
-    name: "Australian Invoicing",
-    slug: "australian-invoicing",
-    category: "Tax & Finance",
-    description: "Tax invoice requirements, e-invoicing, and compliance",
-    tags: ["invoice", "tax-invoice", "gst"],
-  },
-  {
-    name: "Workers Compensation",
-    slug: "workers-compensation",
-    category: "Legal",
-    description: "WorkCover requirements and claims across all states",
-    tags: ["workcover", "injury", "insurance"],
-  },
-  {
-    name: "Xero Basics",
-    slug: "xero-basics",
-    category: "Business",
-    description: "Using Xero for BAS, payroll, and invoicing in Australia",
-    tags: ["xero", "accounting", "payroll"],
-  },
+  // Tax & Finance
+  { name: "ATO BAS Helper", slug: "ato-bas-helper", category: "Tax & Finance", description: "BAS preparation, GST calculations, and ATO compliance", tags: ["ato", "bas", "gst"] },
+  { name: "Superannuation Guide", slug: "superannuation", category: "Tax & Finance", description: "Super rules, contributions, SMSF, and retirement", tags: ["super", "smsf"] },
+  { name: "NSW Stamp Duty", slug: "nsw-stamp-duty", category: "Tax & Finance", description: "NSW transfer duty and first home buyer exemptions", tags: ["stamp-duty", "property"] },
+  { name: "Australian Invoicing", slug: "australian-invoicing", category: "Tax & Finance", description: "Tax invoice requirements and e-invoicing", tags: ["invoice", "gst"] },
+  { name: "Capital Gains Tax", slug: "capital-gains-tax", category: "Tax & Finance", description: "CGT calculations, exemptions, and discounts", tags: ["cgt", "property", "shares"] },
+  
+  // Government
+  { name: "ABN Lookup", slug: "abn-lookup", category: "Government", description: "ABN validation and business registry search", tags: ["abn", "acn"] },
+  { name: "myGov Services", slug: "mygov-services", category: "Government", description: "Medicare, Centrelink, and myGov services", tags: ["mygov", "medicare"] },
+  { name: "ASIC Company Search", slug: "asic-company-search", category: "Government", description: "Company and director information lookup", tags: ["asic", "company"] },
+  { name: "Business Registration", slug: "business-registration", category: "Government", description: "Register ABN, business names, companies, GST", tags: ["abn", "registration"] },
+  
+  // Legal
+  { name: "Fair Work Australia", slug: "fair-work", category: "Legal", description: "Employment law, awards, NES, workplace relations", tags: ["employment", "awards"] },
+  { name: "Privacy Act", slug: "privacy-act", category: "Legal", description: "Privacy Act 1988, APPs, data breach notification", tags: ["privacy", "data"] },
+  { name: "VIC Rental Laws", slug: "vic-rental-laws", category: "Legal", description: "Victorian tenancy laws, bonds, disputes", tags: ["rental", "victoria"] },
+  { name: "NSW Rental Laws", slug: "nsw-rental-laws", category: "Legal", description: "NSW tenancy laws, bonds, disputes", tags: ["rental", "nsw"] },
+  { name: "Consumer Law", slug: "consumer-law", category: "Legal", description: "ACL consumer guarantees and refund rights", tags: ["acl", "refunds"] },
+  { name: "Workers Compensation", slug: "workers-compensation", category: "Legal", description: "WorkCover requirements across all states", tags: ["workcover", "injury"] },
+  { name: "Food Safety", slug: "food-safety", category: "Legal", description: "FSANZ standards and food business compliance", tags: ["food", "fsanz"] },
+  
+  // Business
+  { name: "Xero Basics", slug: "xero-basics", category: "Business", description: "Xero for BAS, payroll, and invoicing", tags: ["xero", "accounting"] },
+  { name: "MYOB Basics", slug: "myob-basics", category: "Business", description: "MYOB for BAS, payroll, and compliance", tags: ["myob", "accounting"] },
+  { name: "Import/Export", slug: "import-export", category: "Business", description: "Customs, duties, GST on imports/exports", tags: ["import", "customs"] },
+  
+  // Localization
+  { name: "Australian English", slug: "aussie-english", category: "Localization", description: "Australian spelling, terminology, and context", tags: ["english", "spelling"] },
 ];
 
 const categories = [...new Set(skills.map(s => s.category))];
@@ -107,7 +38,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
       {/* Header */}
-      <header className="border-b border-slate-700">
+      <header className="border-b border-slate-700 sticky top-0 bg-slate-900/95 backdrop-blur z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-2xl">🇦🇺</span>
@@ -116,69 +47,54 @@ export default function Home() {
           <nav className="flex gap-6">
             <a href="#skills" className="text-slate-300 hover:text-white">Skills</a>
             <a href="#contribute" className="text-slate-300 hover:text-white">Contribute</a>
-            <a 
-              href="https://github.com/AussieAgentsSkills/skills" 
-              target="_blank"
-              className="text-slate-300 hover:text-white"
-            >
-              GitHub
-            </a>
+            <a href="https://github.com/AussieAgentsSkills/skills" target="_blank" className="text-slate-300 hover:text-white">GitHub</a>
           </nav>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="max-w-6xl mx-auto px-4 py-20 text-center">
-        <h1 className="text-5xl font-bold text-white mb-6">
-          AI Agent Skills for Australia
-        </h1>
+      <section className="max-w-6xl mx-auto px-4 py-16 text-center">
+        <h1 className="text-5xl font-bold text-white mb-6">AI Agent Skills for Australia</h1>
         <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-          Open-source skills for Claude Code, Cursor, OpenClaw and more. 
-          Built for Australian business, tax, legal, and government.
+          Open-source skills for Claude Code, Cursor, OpenClaw and more. Built for Australian business, tax, legal, and government.
         </p>
-        <div className="flex gap-4 justify-center">
-          <a 
-            href="#skills"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium"
-          >
+        <div className="flex gap-4 justify-center flex-wrap">
+          <a href="#skills" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium">
             Browse {skills.length} Skills
           </a>
-          <a 
-            href="https://github.com/AussieAgentsSkills/skills"
-            target="_blank"
-            className="bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg font-medium"
-          >
-            View on GitHub
+          <a href="https://github.com/AussieAgentsSkills/skills" target="_blank" className="bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg font-medium">
+            ⭐ Star on GitHub
           </a>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="max-w-6xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-3 gap-8 text-center">
-          <div className="bg-slate-800 rounded-xl p-6">
-            <div className="text-4xl font-bold text-blue-400">{skills.length}</div>
-            <div className="text-slate-400">Skills</div>
+      <section className="max-w-6xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div className="bg-slate-800 rounded-xl p-4">
+            <div className="text-3xl font-bold text-blue-400">{skills.length}</div>
+            <div className="text-slate-400 text-sm">Skills</div>
           </div>
-          <div className="bg-slate-800 rounded-xl p-6">
-            <div className="text-4xl font-bold text-green-400">{categories.length}</div>
-            <div className="text-slate-400">Categories</div>
+          <div className="bg-slate-800 rounded-xl p-4">
+            <div className="text-3xl font-bold text-green-400">{categories.length}</div>
+            <div className="text-slate-400 text-sm">Categories</div>
           </div>
-          <div className="bg-slate-800 rounded-xl p-6">
-            <div className="text-4xl font-bold text-yellow-400">100%</div>
-            <div className="text-slate-400">Free & Open Source</div>
+          <div className="bg-slate-800 rounded-xl p-4">
+            <div className="text-3xl font-bold text-yellow-400">100%</div>
+            <div className="text-slate-400 text-sm">Free</div>
+          </div>
+          <div className="bg-slate-800 rounded-xl p-4">
+            <div className="text-3xl font-bold text-purple-400">5+</div>
+            <div className="text-slate-400 text-sm">AI Agents</div>
           </div>
         </div>
       </section>
 
-      {/* Categories Filter */}
+      {/* Categories */}
       <section className="max-w-6xl mx-auto px-4 py-4">
         <div className="flex flex-wrap gap-2 justify-center">
           {categories.map((cat) => (
-            <span 
-              key={cat}
-              className="bg-slate-700 text-slate-200 px-4 py-2 rounded-full text-sm"
-            >
+            <span key={cat} className="bg-slate-700 text-slate-200 px-4 py-2 rounded-full text-sm">
               {cat} ({skills.filter(s => s.category === cat).length})
             </span>
           ))}
@@ -188,23 +104,15 @@ export default function Home() {
       {/* Skills Grid */}
       <section id="skills" className="max-w-6xl mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold text-white mb-8">Available Skills</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {skills.map((skill) => (
-            <div 
-              key={skill.slug}
-              className="bg-slate-800 rounded-xl p-6 hover:bg-slate-750 transition border border-slate-700 hover:border-blue-500"
-            >
-              <div className="text-sm text-blue-400 mb-2">{skill.category}</div>
-              <h3 className="text-xl font-semibold text-white mb-2">{skill.name}</h3>
-              <p className="text-slate-400 text-sm mb-4">{skill.description}</p>
-              <div className="flex flex-wrap gap-2">
+            <div key={skill.slug} className="bg-slate-800 rounded-xl p-5 border border-slate-700 hover:border-blue-500 transition">
+              <div className="text-xs text-blue-400 mb-1">{skill.category}</div>
+              <h3 className="text-lg font-semibold text-white mb-2">{skill.name}</h3>
+              <p className="text-slate-400 text-sm mb-3">{skill.description}</p>
+              <div className="flex flex-wrap gap-1">
                 {skill.tags.map((tag) => (
-                  <span 
-                    key={tag}
-                    className="bg-slate-700 text-slate-300 px-2 py-1 rounded text-xs"
-                  >
-                    {tag}
-                  </span>
+                  <span key={tag} className="bg-slate-700 text-slate-300 px-2 py-0.5 rounded text-xs">{tag}</span>
                 ))}
               </div>
             </div>
@@ -212,81 +120,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Install Section */}
+      {/* Install */}
       <section className="max-w-6xl mx-auto px-4 py-12">
         <div className="bg-slate-800 rounded-xl p-8 border border-slate-700">
           <h2 className="text-2xl font-bold text-white mb-4">Quick Install</h2>
-          <p className="text-slate-400 mb-6">
-            Clone the skills you need directly into your project:
-          </p>
-          <div className="bg-slate-900 rounded-lg p-4 font-mono text-sm text-green-400 overflow-x-auto">
+          <div className="bg-slate-900 rounded-lg p-4 font-mono text-sm text-green-400">
             git clone https://github.com/AussieAgentsSkills/skills.git
           </div>
-          <p className="text-slate-500 mt-4 text-sm">
-            Works with Claude Code, Cursor, GitHub Copilot, Windsurf, and OpenClaw.
-          </p>
+          <p className="text-slate-500 mt-4 text-sm">Works with Claude Code, Cursor, GitHub Copilot, Windsurf, and OpenClaw.</p>
         </div>
       </section>
 
       {/* Contribute */}
       <section id="contribute" className="max-w-6xl mx-auto px-4 py-12">
-        <div className="bg-gradient-to-r from-blue-900/50 to-green-900/50 rounded-xl p-8 border border-slate-700">
-          <h2 className="text-3xl font-bold text-white mb-4 text-center">Want to Contribute?</h2>
-          <p className="text-slate-300 mb-6 max-w-xl mx-auto text-center">
-            We welcome Australian-specific skills. Submit a PR on GitHub 
-            and get your name featured as a contributor.
+        <div className="bg-gradient-to-r from-blue-900/50 to-green-900/50 rounded-xl p-8 border border-slate-700 text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">Contribute a Skill</h2>
+          <p className="text-slate-300 mb-6 max-w-xl mx-auto">
+            Know Australian tax, law, or business? Submit a skill and get featured as a contributor.
           </p>
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
-            <div className="text-center">
-              <div className="text-3xl mb-2">📝</div>
-              <div className="text-white font-medium">Create Skill</div>
-              <div className="text-slate-400 text-sm">Write a SKILL.md file</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl mb-2">🔍</div>
-              <div className="text-white font-medium">Get Reviewed</div>
-              <div className="text-slate-400 text-sm">We check accuracy & quality</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl mb-2">⭐</div>
-              <div className="text-white font-medium">Get Featured</div>
-              <div className="text-slate-400 text-sm">Your name on the skill</div>
-            </div>
-          </div>
-          <div className="text-center">
-            <a 
-              href="https://github.com/AussieAgentsSkills/skills/pulls"
-              target="_blank"
-              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium inline-block"
-            >
-              Submit a Skill
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills We Need */}
-      <section className="max-w-6xl mx-auto px-4 py-12">
-        <h2 className="text-2xl font-bold text-white mb-6 text-center">Skills We Need</h2>
-        <div className="flex flex-wrap gap-3 justify-center">
-          {["QLD Rental Laws", "WA Stamp Duty", "MYOB Integration", "Capital Gains Tax", "Trust Accounting", "Strata Laws", "Building Codes", "Food Safety", "Liquor Licensing", "Import/Export"].map((skill) => (
-            <span 
-              key={skill}
-              className="bg-slate-800 border border-dashed border-slate-600 text-slate-400 px-4 py-2 rounded-lg text-sm"
-            >
-              {skill}
-            </span>
-          ))}
+          <a href="https://github.com/AussieAgentsSkills/skills/pulls" target="_blank" className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium inline-block">
+            Submit a Skill →
+          </a>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="border-t border-slate-700 mt-12">
         <div className="max-w-6xl mx-auto px-4 py-8 text-center text-slate-400">
-          <p>Made in Australia 🇦🇺 | Open Source on GitHub</p>
-          <p className="mt-2 text-sm">
-            aussieagentskills.com | aussieagentskills.com.au | agentskills.com.au
-          </p>
+          <p>Made in Australia 🇦🇺 | Open Source</p>
+          <p className="mt-2 text-sm">aussieagentskills.com</p>
         </div>
       </footer>
     </div>
