@@ -2,30 +2,43 @@
 import { useState } from "react";
 import Link from "next/link";
 
+const SUPABASE_URL = "https://nsrxksrttgetfgizdnqg.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_YV9YxLDrcqOaStYehTkzfA_9FFfiLXC";
+
 export default function Newsletter() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
     
     try {
-      const response = await fetch("https://formspree.io/f/xwpkgjvn", {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
         method: "POST",
-        body: JSON.stringify({ email, source: "newsletter_page" }),
         headers: { 
-          Accept: "application/json",
-          "Content-Type": "application/json"
+          "apikey": SUPABASE_ANON_KEY,
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal"
         },
+        body: JSON.stringify({
+          name: email,
+          notes: "newsletter_signup",
+          status: "newsletter"
+        })
       });
       
-      if (response.ok) {
+      if (response.ok || response.status === 201) {
         setSubmitted(true);
+      } else {
+        setError("Something went wrong. Try again.");
       }
-    } catch (error) {
-      console.error("Error:", error);
+    } catch (err) {
+      setError("Something went wrong. Try again.");
     }
     setLoading(false);
   };
@@ -73,6 +86,7 @@ export default function Newsletter() {
             className="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none"
             placeholder="your@email.com"
           />
+          {error && <p className="text-red-400 text-sm">{error}</p>}
           <button
             type="submit"
             disabled={loading}

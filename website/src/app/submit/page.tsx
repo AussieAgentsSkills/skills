@@ -2,29 +2,51 @@
 import { useState } from "react";
 import Link from "next/link";
 
+const SUPABASE_URL = "https://nsrxksrttgetfgizdnqg.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_YV9YxLDrcqOaStYehTkzfA_9FFfiLXC";
+
 export default function SubmitSkill() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
     
     const form = e.currentTarget;
     const formData = new FormData(form);
     
+    const submission = {
+      name: formData.get("email") as string,
+      phone: formData.get("name") as string,
+      address: formData.get("skill_name") as string,
+      bin_size: formData.get("category") as string,
+      waste_type: formData.get("description") as string,
+      notes: `SKILL SUBMISSION\n\nGitHub: ${formData.get("github") || "N/A"}\nNewsletter: ${formData.get("newsletter") || "no"}\nSources: ${formData.get("sources") || "N/A"}\n\n---CONTENT---\n${formData.get("skill_content")}`,
+      status: "skill_submission"
+    };
+    
     try {
-      const response = await fetch("https://formspree.io/f/movqgwrz", {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
         method: "POST",
-        body: formData,
-        headers: { Accept: "application/json" },
+        headers: { 
+          "apikey": SUPABASE_ANON_KEY,
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal"
+        },
+        body: JSON.stringify(submission)
       });
       
-      if (response.ok) {
+      if (response.ok || response.status === 201) {
         setSubmitted(true);
+      } else {
+        setError("Something went wrong. Try again or email us directly.");
       }
-    } catch (error) {
-      console.error("Error:", error);
+    } catch (err) {
+      setError("Something went wrong. Try again.");
     }
     setLoading(false);
   };
@@ -126,6 +148,8 @@ export default function SubmitSkill() {
               </div>
             </label>
           </div>
+
+          {error && <p className="text-red-400 text-sm">{error}</p>}
 
           <button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 text-white px-6 py-3 rounded-lg font-medium">
             {loading ? "Submitting..." : "Submit Skill"}
