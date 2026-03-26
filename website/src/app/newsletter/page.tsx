@@ -2,9 +2,6 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const SUPABASE_URL = "https://nsrxksrttgetfgizdnqg.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_YV9YxLDrcqOaStYehTkzfA_9FFfiLXC";
-
 export default function Newsletter() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -17,29 +14,20 @@ export default function Newsletter() {
     setError("");
     
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers`, {
+      const response = await fetch("/api/subscribe", {
         method: "POST",
-        headers: { 
-          "apikey": SUPABASE_ANON_KEY,
-          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-          "Content-Type": "application/json",
-          "Prefer": "return=minimal"
-        },
-        body: JSON.stringify({
-          email: email,
-          source: "website"
-        })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, source: "newsletter_page" })
       });
       
-      if (response.ok || response.status === 201) {
+      const data = await response.json();
+      
+      if (response.ok) {
         setSubmitted(true);
+      } else if (data.error === "already_subscribed") {
+        setError("You're already subscribed!");
       } else {
-        const data = await response.json();
-        if (data?.code === "23505") {
-          setError("You're already subscribed!");
-        } else {
-          setError("Something went wrong. Try again.");
-        }
+        setError("Something went wrong. Try again.");
       }
     } catch (err) {
       setError("Something went wrong. Try again.");
@@ -52,9 +40,9 @@ export default function Newsletter() {
       <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 flex items-center justify-center px-4">
         <div className="bg-slate-800 rounded-xl p-8 max-w-md text-center border border-green-500">
           <div className="text-5xl mb-4">🎉</div>
-          <h1 className="text-2xl font-bold text-white mb-4">You are in!</h1>
+          <h1 className="text-2xl font-bold text-white mb-4">You're in!</h1>
           <p className="text-slate-300 mb-6">
-            Welcome to the Aussie Agent Skills community. We will keep you updated on new skills and features.
+            Welcome to the Aussie Agent Skills community. We'll keep you updated on new skills and features.
           </p>
           <Link href="/" className="text-blue-400 hover:text-blue-300">
             ← Back to home
