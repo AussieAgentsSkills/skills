@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Header from "@/components/Header";
 
 export default function Newsletter() {
   const [submitted, setSubmitted] = useState(false);
@@ -54,14 +55,7 @@ export default function Newsletter() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
-      <header className="border-b border-slate-700">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <Link href="/" className="flex items-center gap-2 w-fit">
-            <span className="text-2xl">🇦🇺</span>
-            <span className="text-xl font-bold text-white">Aussie Agent Skills</span>
-          </Link>
-        </div>
-      </header>
+      <Header navLinks={[]} />
 
       <div className="max-w-md mx-auto px-4 py-20 text-center">
         <h1 className="text-3xl font-bold text-white mb-4">Join the Community</h1>

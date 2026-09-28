@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Header from "@/components/Header";
 
-const SUPABASE_URL = "https://nsrxksrttgetfgizdnqg.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_YV9YxLDrcqOaStYehTkzfA_9FFfiLXC";
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || "";
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || "";
 
 export default function SubmitSkill() {
   const [submitted, setSubmitted] = useState(false);
@@ -86,14 +87,7 @@ export default function SubmitSkill() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
-      <header className="border-b border-slate-700">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <Link href="/" className="flex items-center gap-2 w-fit">
-            <span className="text-2xl">🇦🇺</span>
-            <span className="text-xl font-bold text-white">Aussie Agent Skills</span>
-          </Link>
-        </div>
-      </header>
+      <Header navLinks={[]} />
 
       <div className="max-w-2xl mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold text-white mb-2">Submit a Skill</h1>
